@@ -46,7 +46,7 @@ try:
 except IOError:
   print("Previous IP address not found")
 
-for i in range(nb_hostnames):
+for i in range(1, nb_hostnames + 1):
   username = os.environ.get(f"USERNAME_{i}")
   password = os.environ.get(f"PASSWORD_{i}")
   hostname = os.environ.get(f"HOSTNAME_{i}")
