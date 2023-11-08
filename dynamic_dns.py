@@ -47,16 +47,16 @@ except IOError:
   print("Previous IP address not found")
 
 for i in range(1, nb_hostnames + 1):
-  username = os.environ.get(f"USERNAME_{i}")
+  host = os.environ.get(f"HOST_{i}")
+  domain = os.environ.get(f"DOMAIN_{i}")
   password = os.environ.get(f"PASSWORD_{i}")
-  hostname = os.environ.get(f"HOSTNAME_{i}")
 
-  if username is None or password is None or hostname is None:
+  if host is None or domain is None or password is None:
     print(f"Error: missing configs for hostname #{i}")
     exit(1)
 
-  url = f"https://{username}:{password}@domains.google.com/"
-  url += f"nic/update?hostname={hostname}&myip={current_ip}"
+  url = f"https://dynamicdns.park-your-domain.com/"
+  url += f"update?host={host}&domain={domain}&password={password}&ip={current_ip}"
 
   headers = {
     "Authorization": "Basic base64-encoded-auth-string",
@@ -64,7 +64,7 @@ for i in range(1, nb_hostnames + 1):
   }
 
   print(f"Updating DNS for hostname #{i}")
-  response = requests.post(url, headers=headers)
+  response = requests.get(url, headers=headers)
   print(f"Response: {response.text}")
 
 with open("./ip_address.txt", "w") as f:
