@@ -67,6 +67,6 @@ for i in range(1, nb_hostnames + 1):
   response = requests.get(url, headers=headers)
   print(f"Response: {response.text}")
 
-with open("./ip_address.txt", "w") as f:
+with open(ip_address_filename, "w") as f:
   f.write(current_ip)
   print("Current IP address saved")
