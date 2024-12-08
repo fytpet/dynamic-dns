@@ -22,7 +22,7 @@ if nb_hostnames < 1:
 
 ip_regexp = re.compile(r"^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$")
 
-current_ip = os.popen("curl -s ifconfig.me").readline()
+current_ip = os.popen("curl -s -4 ifconfig.me").readline()
 
 if not ip_regexp.match(current_ip):
   print(f"Error: failed to fetch IP address ({current_ip})")
